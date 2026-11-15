@@ -11,29 +11,28 @@ interface Props {
 export default function NavLinks({ user }: Props) {
   const pathname = usePathname();
   const link = (href: string, label: string) => (
-    <Link href={href} className={`nav-link${pathname === href || pathname.startsWith(href + "/") ? " active" : ""}`}>
+    <Link href={href} aria-current={pathname === href ? "page" : undefined} className={`nav-link${pathname === href || pathname.startsWith(href + "/") ? " active" : ""}`}>
       {label}
     </Link>
   );
 
   return (
     <div className="nav-links">
-      {link("/", "Home")}
-      {link("/purchase", "Pricing")}
-      {user ? (
-        <>
-          {link("/ps", "Account")}
-          {user.role === "admin" && link("/panel", "Panel")}
+      <div className="nav-primary">
+        {link("/", "Главная")}
+        {link("/purchase", "Продукты")}
+        {link("/support", "Поддержка")}
+        {link("/faq", "Частые вопросы")}
+      </div>
+      <div className="nav-account">
+        {user?.role === "admin" && link("/panel", "Панель")}
+        {user && (
           <form action={logoutAction}>
-            <button type="submit" className="nav-link">Sign out</button>
+            <button type="submit" className="nav-link">Выйти</button>
           </form>
-        </>
-      ) : (
-        <>
-          {link("/login", "Sign in")}
-          {link("/register", "Register")}
-        </>
-      )}
+        )}
+        <Link href={user ? "/ps" : "/login"} className="nav-account-button">Личный кабинет</Link>
+      </div>
     </div>
   );
 }

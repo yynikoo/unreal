@@ -27,11 +27,10 @@ export default async function RootLayout({ children }: { children: React.ReactNo
   return (
     <html lang="en" className={`${inter.variable} ${poppins.variable}`}>
       <body>
-        <header className="site-header container">
-          <nav className="nav" aria-label="Main">
-            <Link href="/" className="brand">
-              <Logo />
-              unreal
+        <header className="site-header">
+          <nav className="nav container" aria-label="Основная навигация">
+            <Link href="/" className="brand" aria-label="Unreal — главная">
+              <Logo size={28} />
             </Link>
             <NavLinks user={user ? { name: user.name, role: user.role } : null} />
           </nav>
