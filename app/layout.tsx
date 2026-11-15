@@ -1,21 +1,24 @@
 import type { Metadata, Viewport } from "next";
+import { Inter, Poppins } from "next/font/google";
 import Link from "next/link";
+import Logo from "@/components/Logo";
 import NavLinks from "@/components/NavLinks";
 import { getCurrentUser } from "@/lib/auth";
 import "./globals.css";
 
+const inter = Inter({ subsets: ["latin", "cyrillic"], variable: "--font-inter", display: "swap" });
+// Poppins is the in-game menu font; used by the ClickGUI replica.
+const poppins = Poppins({ subsets: ["latin"], weight: ["400", "500", "600"], variable: "--font-poppins", display: "swap" });
+
 export const metadata: Metadata = {
   title: { default: "Unreal", template: "%s · Unreal" },
-  description: "Unreal: account, plans and access.",
+  description: "Unreal: a clean, fast Minecraft client.",
 };
 
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
-  themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "#e7eaf0" },
-    { media: "(prefers-color-scheme: dark)", color: "#262a31" },
-  ],
+  themeColor: "#060609",
 };
 
 // Applies a saved theme choice before first paint (no flash).
@@ -25,7 +28,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
   const user = await getCurrentUser();
 
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="en" className={`${inter.variable} ${poppins.variable}`} suppressHydrationWarning>
       <head>
         <script dangerouslySetInnerHTML={{ __html: themeScript }} />
       </head>
@@ -33,7 +36,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
         <header className="site-header container">
           <nav className="nav" aria-label="Main">
             <Link href="/" className="brand">
-              <span className="brand-mark" aria-hidden />
+              <Logo />
               unreal
             </Link>
             <NavLinks user={user ? { name: user.name, role: user.role } : null} />

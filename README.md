@@ -1,6 +1,8 @@
 # Unreal
 
-A small Next.js 15 (App Router) site with a minimal neumorphic look, light/dark themes and responsive layout. Built to be deployed on Vercel as `unreal.vercel.app`.
+A Next.js 15 (App Router) site for the Unreal client: dark, card-based look (light theme via the toggle), responsive. Built to be deployed on Vercel as `unreal.vercel.app`.
+
+The home page embeds an interactive web replica of the in-game menu (`components/clickgui/`). Sizes and colors follow `ModernClickgui` / `ModuleGrid` from the mod (994×631 design units, `#0E0E13` frame, `#FF5A1A` accent); tab list and module names live in `components/clickgui/data.ts`.
 
 | Route       | What it is                                    | Access                                |
 | ----------- | --------------------------------------------- | ------------------------------------- |

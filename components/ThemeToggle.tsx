@@ -5,9 +5,8 @@ import { useEffect, useState } from "react";
 type Theme = "light" | "dark";
 
 function currentTheme(): Theme {
-  const set = document.documentElement.dataset.theme;
-  if (set === "light" || set === "dark") return set;
-  return window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+  // Dark is the default look; light only when chosen.
+  return document.documentElement.dataset.theme === "light" ? "light" : "dark";
 }
 
 export default function ThemeToggle() {

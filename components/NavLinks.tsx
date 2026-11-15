@@ -19,7 +19,8 @@ export default function NavLinks({ user }: Props) {
 
   return (
     <div className="nav-links">
-      {link("/purchase", "Purchase")}
+      {link("/", "Home")}
+      {link("/purchase", "Pricing")}
       {user ? (
         <>
           {link("/ps", "Account")}
