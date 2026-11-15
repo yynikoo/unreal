@@ -3,7 +3,6 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { logoutAction } from "@/app/actions";
-import ThemeToggle from "./ThemeToggle";
 
 interface Props {
   user: { name: string; role: "user" | "admin" } | null;
@@ -35,7 +34,6 @@ export default function NavLinks({ user }: Props) {
           {link("/register", "Register")}
         </>
       )}
-      <ThemeToggle />
     </div>
   );
 }

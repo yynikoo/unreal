@@ -21,17 +21,11 @@ export const viewport: Viewport = {
   themeColor: "#060609",
 };
 
-// Applies a saved theme choice before first paint (no flash).
-const themeScript = `try{var t=localStorage.getItem("theme");if(t==="light"||t==="dark")document.documentElement.dataset.theme=t}catch(e){}`;
-
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
   const user = await getCurrentUser();
 
   return (
-    <html lang="en" className={`${inter.variable} ${poppins.variable}`} suppressHydrationWarning>
-      <head>
-        <script dangerouslySetInnerHTML={{ __html: themeScript }} />
-      </head>
+    <html lang="en" className={`${inter.variable} ${poppins.variable}`}>
       <body>
         <header className="site-header container">
           <nav className="nav" aria-label="Main">

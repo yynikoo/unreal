@@ -5,7 +5,7 @@
 
 import { useMemo, useState, type CSSProperties } from "react";
 import { ACCENTS, CONFIGS, FRIENDS, MODULES, TABS, type ModuleDef, type Setting, type TabId } from "./data";
-import { ChevronDown, ChevronRight, GearIcon, MoonIcon, SearchIcon, SunIcon, TabIcon } from "./icons";
+import { ChevronDown, ChevronRight, GearIcon, SearchIcon, TabIcon } from "./icons";
 import "./clickgui.css";
 
 type Values = Record<string, number | boolean | string>;
@@ -39,7 +39,6 @@ function splitColumns<T extends { mod: ModuleDef }>(items: T[]): [T[], T[]] {
 
 export default function ClickGui({ username = "Player" }: { username?: string }) {
   const [tab, setTab] = useState<TabId>("combat");
-  const [light, setLight] = useState(false);
   const [accent, setAccent] = useState(ACCENTS[0]);
   const [enabled, setEnabled] = useState(initialEnabled);
   const [values, setValues] = useState(initialValues);
@@ -65,14 +64,10 @@ export default function ClickGui({ username = "Player" }: { username?: string })
 
   return (
     <div className="cg" aria-label="Unreal menu preview">
-      <div className={`cg-frame${light ? " light" : ""}`} style={style}>
-        {/* top-left: wordmark */}
+      <div className="cg-frame" style={style}>
+        {/* top-left: logo glyph, centered like renderWordmark */}
         <div className="cg-logo">
-          <svg viewBox="0 0 24 24" fill="none" aria-hidden>
-            <path d="M5 3.5v9a7 7 0 0 0 14 0v-9" stroke="currentColor" strokeWidth="3.2" strokeLinecap="round" />
-            <circle cx="12" cy="12.5" r="2.2" fill="currentColor" />
-          </svg>
-          <span>unreal</span>
+          <span className="logo-mark" aria-hidden />
         </div>
 
         {/* top-right: "Group / Tab" header + profile */}
@@ -132,10 +127,10 @@ export default function ClickGui({ username = "Player" }: { username?: string })
             <button type="button" aria-label="Search" className={searching ? "on" : ""} onClick={() => setSearching((v) => !v)}>
               <SearchIcon />
             </button>
-            <button type="button" aria-label={light ? "Dark menu" : "Light menu"} onClick={() => setLight((v) => !v)}>
-              {light ? <MoonIcon /> : <SunIcon />}
+            <button type="button" aria-label="Cloud configs" onClick={() => { setTab("configs"); setSearching(false); }}>
+              <TabIcon id="configs" />
             </button>
-            <button type="button" aria-label="Themes" onClick={() => { setTab("themes"); setSearching(false); }}>
+            <button type="button" aria-label="Accent colors" onClick={() => { setTab("themes"); setSearching(false); }}>
               <GearIcon />
             </button>
           </div>
@@ -191,13 +186,6 @@ export default function ClickGui({ username = "Player" }: { username?: string })
                     />
                   ))}
                 </div>
-              </div>
-              <div className="cg-card cg-row" style={{ animationDelay: "28ms" }}>
-                <div>
-                  <div className="cg-name">Light theme</div>
-                  <div className="cg-desc">Switch the whole menu to light.</div>
-                </div>
-                <Switch on={light} onClick={() => setLight((v) => !v)} />
               </div>
             </div>
           ) : items.length === 0 ? (

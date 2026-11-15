@@ -29,7 +29,7 @@ export default async function Home() {
 
       <section className="showcase" aria-label="Menu preview">
         <ClickGui username={user?.name ?? "Player"} />
-        <p className="showcase-caption">This is our in-game menu, live in your browser. Click a card, open its settings, switch tabs or themes.</p>
+        <p className="showcase-caption">This is our in-game menu, live in your browser. Click a card, open its settings, switch tabs or colors.</p>
       </section>
 
       <section className="section">
@@ -81,7 +81,7 @@ export default async function Home() {
               ))}
             </div>
           </div>
-          <div className="card feature">
+          <div className="card feature wide">
             <h3>Cloud configs</h3>
             <p>Load a ready-made setup in one click, or save yours to the cloud.</p>
             <div className="visual chips">
@@ -90,20 +90,12 @@ export default async function Home() {
               <span className="chip">Visuals Only</span>
             </div>
           </div>
-          <div className="card feature">
+          <div className="card feature wide">
             <h3>Friends</h3>
             <p>Middle-click a player to add them. Friends are never targeted.</p>
             <div className="visual chips">
               <span className="chip on">mira · online</span>
               <span className="chip">lex</span>
-            </div>
-          </div>
-          <div className="card feature">
-            <h3>Light or dark</h3>
-            <p>Both themes, with a smooth fade between them.</p>
-            <div className="visual chips">
-              <span className="chip on">Dark</span>
-              <span className="chip">Light</span>
             </div>
           </div>
         </div>
